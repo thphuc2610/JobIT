@@ -485,15 +485,16 @@ public class UserServiceImpl implements UserService {
         updateUser.setId(oldUser.getId());
         updateUser.setEmail(oldUser.getEmail());
         updateUser.setPassword(oldUser.getPassword());
-
-        // check update file Avatar
-        if (!StringUtils.equals(updateUser.getAvatar(), oldUser.getAvatar()) || (fileAvatar != null)) {
-            fileService.deleteFile(oldUser.getAvatar());
-            updateUser.setAvatar(fileService.uploadFile(fileAvatar));
-        }
-
         updateUser.setRole(oldUser.getRole());
         updateUser.setStatus(oldUser.getStatus());
+
+        // check update file Avatar
+        if (fileAvatar != null && !fileAvatar.isEmpty()) {
+            fileService.deleteFile(oldUser.getAvatar());
+            updateUser.setAvatar(fileService.uploadFile(fileAvatar));
+        } else {
+            updateUser.setAvatar(oldUser.getAvatar());
+        }
 
         return userMapper.toDTO(userRepository.save(updateUser));
     }

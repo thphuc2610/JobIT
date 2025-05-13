@@ -89,7 +89,7 @@ public class CandidateServiceImpl implements CandidateService {
         UserDTO updatedUserDTO = userService.update(
                 oldCandidate.getUser().getId(),
                 candidateProfileDTO.getUserProfileDTO(),
-                fileAvatar
+                (fileAvatar != null && !fileAvatar.isEmpty()) ? fileAvatar : null
         );
 
         // Cập nhật trường đại học nếu có
@@ -97,7 +97,7 @@ public class CandidateServiceImpl implements CandidateService {
         if (universityDTO != null && universityDTO.getId() != null) {
             University existingUniversity = universityRepository.findById(universityDTO.getId())
                     .orElseThrow(() -> new ResourceNotFoundExceptionV2(
-                            Collections.singletonMap("UniversityID", universityDTO.getId())));
+                            Collections.singletonMap("University not found with id: ", universityDTO.getId())));
             oldCandidate.setUniversity(existingUniversity);
         }
 
