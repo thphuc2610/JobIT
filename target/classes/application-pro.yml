@@ -1,0 +1,19 @@
+server:
+  port: 8085
+db:
+  port: 
+  name: dev_internship
+  endpoint: 45.117.170.206
+  username: jobsit.dev
+  password: Abc@12345
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://${db.endpoint}:${db.port}/${db.name}
+    username: ${db.username}
+    password: ${db.password}
+url:
+  redirect:
+    path: ${domain.path}
+domain:
+  path: http://jobsit.vn/

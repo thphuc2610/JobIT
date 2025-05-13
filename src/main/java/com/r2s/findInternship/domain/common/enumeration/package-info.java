@@ -1,0 +1,1 @@
+package com.r2s.findInternship.domain.common.enumeration;

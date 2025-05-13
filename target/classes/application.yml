@@ -1,0 +1,94 @@
+spring:
+  main:
+    allow-circular-references: true
+
+  profiles:
+    active: dev #Active DEV or PRO Environment
+  jackson:
+    time-zone: GMT+7
+    serialization:
+      fail-on-empty-beans: false
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+      naming:
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+    properties:
+      hibernate:
+        current_session_context_class: org.springframework.orm.hibernate5.SpringSessionContext
+
+        # MySQL5 -> MySQL8 2024/10/19 PhucHT START
+        dialect: org.hibernate.dialect.MySQL8Dialect
+        # MySQL5 -> MySQL8 2024/10/19 PhucHT END
+
+        format_sql: true
+        jdbc.time_zone: GMT+7
+    show-sql: true
+
+  security:
+    oauth2:
+      client:
+        registration:
+          google:
+            clientId: 933805166019-eooik5chr2fpvpqlacjpq5q0qfrio7qr.apps.googleusercontent.com
+            clientSecret: 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
+            #            clientId: 429520851525-bu25mgl7ni0knedlab6bi2gkmpuoa1pc.apps.googleusercontent.com
+            #            clientSecret: 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
+            scope:
+              - email
+              - profile
+          facebook:
+            clientId: 247027257918761
+            clientSecret: 6e2f8fd2a7b20b841f7444f8820ff846
+            #            clientId: 210860898265169
+            #            clientSecret: 292806b318414afbe05c6c2a7c3909bb
+            scope:
+              - email
+              - public_profile
+  #File
+  servlet:
+    multipart:
+      max-file-size: 10MB
+      max-request-size: 10MB
+
+  #MAIL SENDER
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: r2sinternship@gmail.com
+    password: oimacwkaclsebydc
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+  cloud:
+    gcp:
+      project-id: platinum-tracer-362404
+      credentials:
+        location: classpath:keystorage.json
+# JWT UTIL
+r2s:
+  jwtSecret: r2SSecretKey
+  jwtExpirationMs: 18000000
+  jwtRefesh: 604800000
+  #File excel version
+  excelVersion: "0.0.0.1"
+
+# Firebase
+url:
+  firebase:
+    bucket: storageimg-36153.appspot.com
+    folder: https://firebasestorage.googleapis.com/v0/b/
+  profiles:
+    active: dev
+logging:
+  config: classpath:log-config-file/logback-spring.xml
+
+
+
+# Store file on server
+file:
+  path: src/main/webapp
